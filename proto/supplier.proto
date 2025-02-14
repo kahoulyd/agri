@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "/proto";
+
+message Supplier {
+  string id = 1;
+  string name = 2;
+  string contact = 3;
+}
+
+message SupplierRequest {
+  string id = 1;
+}
+
+message SupplierList {
+  repeated Supplier suppliers = 1;
+}
+
+message AddSupplierRequest {
+  string name = 1;
+  string contact = 2;
+}
+
+message UpdateSupplierRequest {
+  string id = 1;
+  string name = 2;
+  string contact = 3;
+}
+
+message DeleteSupplierRequest {
+  string id = 1;
+}
+
+message DeleteSupplierResponse {
+  string message = 1;
+}
+
+service SupplierServiceProto {
+  rpc P_GetSuppliers (SupplierRequest) returns (SupplierList);
+  rpc P_AddSupplier (AddSupplierRequest) returns (Supplier);
+  rpc P_UpdateSupplier (UpdateSupplierRequest) returns (Supplier);
+  rpc P_DeleteSupplier (DeleteSupplierRequest) returns (DeleteSupplierResponse);
+}
